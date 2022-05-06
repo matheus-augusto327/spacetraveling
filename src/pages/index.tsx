@@ -55,14 +55,19 @@ export default function Home({ postsPagination }: HomeProps) {
 
 export const getStaticProps: GetStaticProps = async () => {
   const prismic = getPrismicClient({});
-  const postsResponse = await prismic.getByType('post');
+  const postsResponse = await prismic.getByType(
+    'post',
+    {
+      fetch: ['post.title', 'post.author', 'post.subtitle'],
+      pageSize: 100,
+    });
 
   const posts = postsResponse.results.map(post => {
     return {
       uid: post.uid,
       data: {
         title: RichText.asText(post.data.title),
-        subtitle: post.data.content.find(content => content.type === 'paragraph')?.text ?? '',
+        subtitle: post.data.subtitle,
         author: post.data.author,
       },
       first_publication_date: new Date(post.last_publication_date).toLocaleDateString('pt-BR', {
@@ -73,11 +78,14 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   })
 
-  console.log(posts)
+  const postsPagination = {
+    next_page: postsResponse.next_page,
+    results: posts,
+  };
 
   return {
     props: {
-      posts
+      postsPagination,
     }
   }
 
