@@ -23,30 +23,51 @@
       transition: color 0.2s;
     }
 
-    strong:hover {
-      color: var(--highlight);
-    }
-
-    .icon {
-      margin-right: 0.5rem;
-    }
-
     p {
       margin: 0.5rem 0 1.5rem;
       font-size: 1.125rem;
       color: var(--body);
     }
 
-    time {
-      display: inline-block;
-      color: var(--body);
-      margin-right: 1.5rem;
-      font-size: 0.875rem;
+    .postInfoContainer {
+      display: flex;
+      flex-direction: row;
 
-      & + p {
-        display: inline;
-        font-size: 0.875rem;
+      div {
+        display: flex;
+        flex-direction: row;
+  
+        time, span {
+          color: var(--body);
+          font-size: 0.875rem;
+        }
+  
+        .icon {
+          color: var(--body);
+          margin-right: 0.5rem;
+        }
+  
+        & + div {
+          margin-left: 1.5rem;
+        }
+  
       }
     }
+
+    &:hover strong {
+      color: var(--highlight);
+    }
   }
+
+}
+
+.loadMorePostsButton {
+  color: var(--highlight);
+  font: 600 1.125rem "Inter", sans-serif;
+
+  background: none;
+  border: none;
+
+  margin-top: 4rem;
+  cursor: pointer;
 }

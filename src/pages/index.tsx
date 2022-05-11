@@ -74,24 +74,31 @@ export default function Home({ postsPagination }: HomeProps) {
               <a>
                 <strong>{post.data.title}</strong>
                 <p>{post.data.subtitle}</p>
-                <time>
-                  <FiCalendar className={styles.icon} />
-                  {format(
-                    new Date(post.first_publication_date),
-                    'dd MMM yyyy',
-                    {
-                      locale: ptBR,
-                    }
-                  )}
-                </time>
-                <p><FiUser className={styles.icon} />{post.data.author}</p>
+                <div className={styles.postInfoContainer}>
+                  <div>
+                    <FiCalendar className={styles.icon} />
+                    <time>
+                      {format(
+                        new Date(post.first_publication_date),
+                        'dd MMM yyyy',
+                        {
+                          locale: ptBR,
+                        }
+                      )}
+                    </time>
+                  </div>
+                  <div>
+                    <FiUser className={styles.icon} />
+                    <span>{post.data.author}</span>
+                  </div>
+                </div>
               </a>
             </Link>
           ))}
         </div>
 
         {pagination.next_page && (
-          <button
+          <button className={styles.loadMorePostsButton}
             onClick={() => loadMorePosts()}
           >
             Carregar mais posts
@@ -132,6 +139,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       postsPagination,
+      revalidate: 1 * 60 * 60
     }
   }
 
