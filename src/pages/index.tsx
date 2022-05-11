@@ -9,7 +9,6 @@ import ptBR from 'date-fns/locale/pt-BR';
 
 import { FiCalendar } from "react-icons/fi";
 import { FiUser } from "react-icons/fi";
-import { FiClock } from "react-icons/fi";
 
 import commonStyles from '../styles/common.module.scss';
 import styles from './home.module.scss';
@@ -65,7 +64,7 @@ export default function Home({ postsPagination }: HomeProps) {
         <title>Spacetraveling</title>
       </Head>
 
-      <main className={styles.container}>
+      <main className={commonStyles.container}>
         <Header />
 
         <div className={styles.posts}>
@@ -74,9 +73,9 @@ export default function Home({ postsPagination }: HomeProps) {
               <a>
                 <strong>{post.data.title}</strong>
                 <p>{post.data.subtitle}</p>
-                <div className={styles.postInfoContainer}>
+                <div className={commonStyles.postInfoContainer}>
                   <div>
-                    <FiCalendar className={styles.icon} />
+                    <FiCalendar className={commonStyles.icon} />
                     <time>
                       {format(
                         new Date(post.first_publication_date),
@@ -88,7 +87,7 @@ export default function Home({ postsPagination }: HomeProps) {
                     </time>
                   </div>
                   <div>
-                    <FiUser className={styles.icon} />
+                    <FiUser className={commonStyles.icon} />
                     <span>{post.data.author}</span>
                   </div>
                 </div>

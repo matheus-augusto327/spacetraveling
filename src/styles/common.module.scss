@@ -1,0 +1,30 @@
+.container {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.postInfoContainer {
+  display: flex;
+  flex-direction: row;
+
+  div {
+    display: flex;
+    flex-direction: row;
+
+    time, span {
+      color: var(--body);
+      font-size: 0.875rem;
+    }
+
+    .icon {
+      color: var(--body);
+      margin-right: 0.5rem;
+    }
+
+    & + div {
+      margin-left: 1.5rem;
+    }
+
+  }
+}

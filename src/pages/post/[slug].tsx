@@ -12,6 +12,7 @@ import { getPrismicClient } from '../../services/prismic';
 
 import commonStyles from '../../styles/common.module.scss';
 import styles from './post.module.scss';
+import { FiCalendar, FiUser, FiClock } from 'react-icons/fi';
 
 interface Post {
   first_publication_date: string | null;
@@ -64,22 +65,33 @@ export default function Post({ post }: PostProps) {
         <title>Spacetraveling</title>
       </Head>
 
-      <main className={styles.container}>
+      <main className={commonStyles.container}>
         <Header />
-        <img src={post.data.banner.url} alt="Banner" />
+        <img src={post.data.banner.url} alt="Banner" className={styles.banner} />
         <article className={styles.post}>
           <h1>{post.data.title}</h1>
-          <time>
-            {format(
-              new Date(post.first_publication_date),
-              'dd MMM yyyy',
-              {
-                locale: ptBR,
-              }
-            )}
-          </time>
-          <span>{post.data.author}</span>
-          <span>{totalMinutes} min</span>
+          <div className={commonStyles.postInfoContainer}>
+                  <div>
+                    <FiCalendar className={commonStyles.icon} />
+                    <time>
+                      {format(
+                        new Date(post.first_publication_date),
+                        'dd MMM yyyy',
+                        {
+                          locale: ptBR,
+                        }
+                      )}
+                    </time>
+                  </div>
+                  <div>
+                    <FiUser className={commonStyles.icon} />
+                    <span>{post.data.author}</span>
+                  </div>
+                  <div>
+                    <FiClock className={commonStyles.icon} />
+                    <span>{totalMinutes} min</span>
+                  </div>
+                </div>
           <div 
             key={post.data.title}
             className={styles.postContent}
